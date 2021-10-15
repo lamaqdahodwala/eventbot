@@ -22,8 +22,9 @@ class Main(commands.Cog):
                 for i in range(events):
                     async with ctx.typing():
                                                 
-                        event = json['events'][i]
-                        embed.add_field(name=event['title'], value=event['formatted_date'], inline=False)
+                        event = json['events'].get(i)
+                        if event:
+                            embed.add_field(name=event['title'], value=event['formatted_date'], inline=False)
 
                 await ctx.send(embed=embed)
 
