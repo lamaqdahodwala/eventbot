@@ -16,13 +16,14 @@ class Main(commands.Cog):
                 resp = await session.get('https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/5080/cms/events?locale=en')
                 json = await resp.json()
                 embed = discord.Embed(title='IMS events')
+                embed.color = discord.Color.green()
 
 
                 for i in range(events):
                     async with ctx.typing():
                                                 
                         event = json['events'][i]
-                        embed.add_field(name=event['title'], value=event['cms_formatted_date'], inline=False)
+                        embed.add_field(name=event['title'], value=event['formatted_date'], inline=False)
 
                 await ctx.send(embed=embed)
 
