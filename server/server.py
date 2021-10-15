@@ -6,4 +6,8 @@ app = Flask('app')
 def hello():
     return "Hello"
 
-app.run('0.0.0.0')
+def main():
+    app.run('0.0.0.0')
+
+if __name__ == '__main__':
+    main()
