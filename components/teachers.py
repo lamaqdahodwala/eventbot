@@ -8,11 +8,11 @@ class Teachers(commands.Cog):
         self.session = aiohttp.ClientSession
 
     @commands.command()
-    async def search(self, ctx, teacher):
+    async def search(self, ctx, teacher=None):
         embed = discord.Embed(title='Results')
         embed.color = discord.Color.green()
         async with self.session() as session:
-            resp = await session.get(f'https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/5080/cms/directories?locale=en&search={teacher}&filter_ids=')           
+            resp = await session.get(f'https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/5080/cms/directories?locale=en&search={teacher}&filter_ids=')       
             json = await resp.json()
             dirs = json['directories']
             for i in dirs:
