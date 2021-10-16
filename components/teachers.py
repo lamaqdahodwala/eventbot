@@ -15,7 +15,7 @@ class Teachers(commands.Cog):
             json = await resp.json()
             dirs = json['directories']
             for i in dirs:
-                embed.add_field(name=i['full_name'], value=f'')
+                embed.add_field(name=i['full_name'], value=f'Phone number: {i["phone_number"]}')
             
             
-                        
+            await ctx.send(embed=embed)
