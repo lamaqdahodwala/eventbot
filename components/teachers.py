@@ -10,6 +10,7 @@ class Teachers(commands.Cog):
     @commands.command()
     async def search(self, ctx, teacher):
         embed = discord.Embed(title='Results')
+        embed.color = discord.Color.green()
         async with self.session() as session:
             resp = await session.get(f'https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/5080/cms/directories?locale=en&search={teacher}&filter_ids=')           
             json = await resp.json()
