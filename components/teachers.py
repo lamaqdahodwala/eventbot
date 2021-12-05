@@ -8,14 +8,20 @@ class Teachers(commands.Cog):
         self.session = aiohttp.ClientSession
 
     @commands.command()
-    async def search(self, ctx, teacher):
-        embed = discord.Embed('Results')
+    async def search(self, ctx, teacher=None):
+        embed = discord.Embed(title='Results')
+        embed.color = discord.Color.green()
         async with self.session() as session:
-            resp = await session.get(f'https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/5080/cms/directories?locale=en&search={teacher}&filter_ids=')           
+            resp = await session.get(f'https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/5080/cms/directories?locale=en&search={teacher}&filter_ids=')       
             json = await resp.json()
             dirs = json['directories']
             for i in dirs:
-                embed.add_field(name=i['full_name'], value=f'Phone number: {i["phone_number"]}')
-            
+                s = BeautifulSoup(i['link'], features='html5lib')
+                
+                embed.add_field(name=i['full_name'], value=f"""
+Title: {i['title']}
+Email: {i['email']}
+Site: {s.a['href'] if s.a['href'] else 'None'}
+                """, inline=False)
             
             await ctx.send(embed=embed)
