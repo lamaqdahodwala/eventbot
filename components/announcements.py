@@ -5,7 +5,6 @@ import re
 import aiohttp
 
 
-re.
 class Announcements(commands.Cog):
     def __init__(self, bot) -> None:
         self.bot = bot
@@ -28,5 +27,5 @@ class Announcements(commands.Cog):
             embed.color = discord.Color.green()
 
             embed.add_field(name='Announcements', value=a)
-            
+
             
