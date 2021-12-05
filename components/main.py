@@ -11,7 +11,7 @@ class Main(commands.Cog):
 
     @commands.command(name='events')
     async def show_events(self, ctx, events=5):
-        # try:
+        try:
             async with self.session() as session:
                 resp = await session.get('https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/5080/cms/events?locale=en')
                 json = await resp.json()
@@ -22,12 +22,13 @@ class Main(commands.Cog):
                 for i in range(events):
                     async with ctx.typing():
                                                 
-                        event = json['events'].get(i)
+                        event = json['events'][i]
                         if event:
                             embed.add_field(name=event['title'], value=event['formatted_date'], inline=False)
 
                 await ctx.send(embed=embed)
 
-        # except Exception as e:
-        #     print(e)
-        #     await ctx.send('Something went wrong.')
+        except Exception as e:
+            print(e)
+            await ctx.send('Something went wrong.')
+

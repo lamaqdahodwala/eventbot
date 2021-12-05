@@ -4,6 +4,7 @@ from server.server import main
 from components.teachers import Teachers
 import threading
 from components.main import Main
+from components.announcements import Announcements
 
 bot = commands.Bot(command_prefix='*')
 
@@ -13,6 +14,7 @@ async def on_ready():
 
 
 bot.add_cog(Main(bot))
+bot.add_cog(Announcements(bot))
 bot.add_cog(Teachers(bot))
 
 

@@ -16,16 +16,17 @@ class Announcements(commands.Cog):
             resp = await session.get('https://thrillshare-cmsv2.services.thrillshare.com/api/v2/s/94968/live_feeds?locale=en')
             json = await resp.json() 
 
-            announcement = json['live_feeds']['0']
+            announcement = json['live_feeds'][0]
 
             time_ago = announcement['time_ago']
-            announcement = announcement['status']
+            an = announcement['status']
 
-            a = re.sub(r'\*', '', announcement)
+            a = re.split(r'\*', an)
 
             embed = discord.Embed(title="IMS Announcements")
             embed.color = discord.Color.green()
 
-            embed.add_field(name='Announcements', value=a)
+            for i in a:
+                embed.add_field(name="Announcement", value=i)
 
-            
+            await ctx.send(embed=embed)
